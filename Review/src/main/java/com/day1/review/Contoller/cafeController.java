@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.day1.review.Repository.cafeRepo;
 import com.day1.review.Service.cafeService;
 import com.day1.review.databaseex.cafeideas;
 
@@ -24,7 +25,7 @@ public class cafeController
 
 public cafeService cser;
 
-@PostMapping( "/postcafe")
+@PostMapping( "/postcafe ")
 public cafeideas addDetails(@RequestBody cafeideas cr)
 {
 	return cser.saveInfoo(cr);
@@ -35,7 +36,6 @@ public List <cafeideas> getDetails()
 {
 	return cser.getInfo();
 } 
-
 @PutMapping("/updateCafe")
 public cafeideas updateDetails(@RequestBody cafeideas cafenum)
 {
@@ -56,7 +56,72 @@ public String deleteDetails(@PathVariable ("cid") int cafenum)
 		cser.deleteInfo(cafenum);
 		return "Cafe number "+cafenum+" is deleted"; 
 	}
+
+@GetMapping("/sortDesc/{oname}")
+public List<cafeideas> sortOwner(@PathVariable("oname") String ownername)
+{
+	return cser.sortDesc(ownername);
 }
+
+@GetMapping("/sortAsc/{oname}")
+public List<cafeideas> sortOwnerasc(@PathVariable ("oname") String ownername)
+{
+	return cser.sortAsc(ownername);
+}
+
+
+@GetMapping("/pagination/{pnu}/{psize}")
+public List <cafeideas> paginationData(@PathVariable ("pnu") int pnu, @PathVariable("psize")int psize)
+{
+	return cser.paginationData(pnu, psize);
+}
+
+@Autowired
+public cafeRepo ir;
+@GetMapping("/saveir")
+public List<cafeideas> getD()
+{
+	return ir.getAllData();
+}
+
+@GetMapping("byName/{id}")
+public List<cafeideas> getName(@PathVariable ("id") int pid )
+{
+	return ir.byCafenum(pid);
+}
+
+@GetMapping("startend/{start}/{end}")
+public List<cafeideas> getStart(@PathVariable ("start")int start,@PathVariable ("end")int end)
+{
+	return ir.startEnd(start, end);
+}
+
+@DeleteMapping("/del/{id}/{name}")
+public String delD(@PathVariable ("id") int id,@PathVariable ("name")String name)
+{
+	ir.deleteD(id, name);
+	return "deleted";
+}
+
+@PutMapping("updatee/{pid}/{pname}")
+public void updateQue(@PathVariable("pid")int pid,@PathVariable("pname") String pname)
+{
+	ir.updateByQuery(pid, pname);
+}
+
+@GetMapping("jp")
+public List<cafeideas> jplQuery()
+{
+	return ir.jpqlQ();
+}
+
+@GetMapping("/upp")
+public List<cafeideas> jpqUp(@PathVariable ("id") int id)
+{
+	return ir.jqBYCon(id);
+}
+}
+
 
 
 
