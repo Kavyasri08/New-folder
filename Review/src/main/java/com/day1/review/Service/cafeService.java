@@ -53,6 +53,12 @@ public List<cafeideas> paginationData (int pageNu,int pageSize)
 	
 }
 
+public List<cafeideas> paginationAndSorting(int pageno,int pageSize,String pname)
+{
+	Page<cafeideas> p=crepo.findAll(PageRequest.of(pageno, pageSize,Sort.by(pname).descending()));
+	return p.getContent();
+}
+
 
 
 }

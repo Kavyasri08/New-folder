@@ -38,8 +38,5 @@ public interface cafeRepo extends JpaRepository<cafeideas, Integer>
         
         @Query(value="select c from cafeideas c where c.cafenum=?1")
         public List<cafeideas> jqBYCon(@Param ("id")int sid);
-        
-        
-        
             
 }
