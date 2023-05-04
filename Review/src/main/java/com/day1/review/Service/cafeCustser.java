@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.day1.review.Repository.cafeCustrep;
 
 import com.day1.review.databaseex.cafeCust;
-import com.day1.review.databaseex.cafeideas;
+
 
 
 @Service
@@ -24,6 +24,28 @@ public class cafeCustser
 	{
 		return rrepo.findAll();
 	}
+	
+	public String checkLogin(String username,String password)
+	{
+		cafeCust user= rrepo.findByusername(username);
+		if(user==null)
+		{
+			return "No Registered user found";
+		}
+		else
+		{
+			if(user.getPassword().equals(password))
+			{
+				return "Registration Succesfull";
+			}
+			else
+			{
+				return "Registration Failed";
+			}
+		}
+	} 
+	
+	
 
 	
 }
