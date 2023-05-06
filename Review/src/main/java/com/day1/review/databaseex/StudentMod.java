@@ -1,4 +1,6 @@
-package com.review2.project.Model;
+package com.day1.review.databaseex;
+
+
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -7,7 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 
 @Entity
-public class StudentModel 
+public class StudentMod 
 {
 	@Id
 	private int studentid;
@@ -15,7 +17,7 @@ public class StudentModel
 	private int studentage;
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn
-	private StudentAddress saddress;
+	private StudentAdd saddress;
 	public int getStudentid() {
 		return studentid;
 	}
@@ -34,13 +36,10 @@ public class StudentModel
 	public void setStudentage(int studentage) {
 		this.studentage = studentage;
 	}
-	public StudentAddress getSaddress() {
+	public StudentAdd getSaddress() {
 		return saddress;
 	}
-	public void setSaddress(StudentAddress saddress) {
+	public void setSaddress(StudentAdd saddress) {
 		this.saddress = saddress;
 	}
-	
-	
-
 }
